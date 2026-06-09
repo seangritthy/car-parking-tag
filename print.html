@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Printable Car Tag - Battambang & Modern</title>
-    <!-- Importing Battambang (Khmer), Outfit (English), and Noto Sans SC (Chinese) -->
+    <title>Sticker Tag</title>
     <link href="https://fonts.googleapis.com/css2?family=Battambang:wght@400;700;900&family=Outfit:wght@400;700;900&family=Noto+Sans+SC:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
@@ -12,158 +11,58 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background-color: #f0f0f0;
+            background-color: #ffffff; /* White background for preview */
             margin: 0;
-            padding: 20px;
         }
 
-        /* --- FONT CLASSES --- */
         .kh { font-family: 'Battambang', sans-serif; }
         .en { font-family: 'Outfit', sans-serif; }
         .zh { font-family: 'Noto Sans SC', sans-serif; }
 
-        .print-card {
-            background-color: white;
-            width: 500px;
-            min-height: 750px;
-            padding: 35px;
-            box-sizing: border-box;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        /* Transparent Sticker Container */
+        .sticker-card {
+            background-color: transparent; /* Transparent for printing */
+            width: 450px;
+            padding: 20px;
             text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            border: 8px solid #111;
+            border: none;
         }
 
-        .header {
-            background-color: #ff4757;
-            color: white;
-            padding: 12px;
-            border-radius: 10px;
-            font-size: 20px;
-            font-weight: 900;
-            letter-spacing: 0.5px;
-            line-height: 1.5;
-        }
-
-        .header-sub {
-            font-size: 15px;
-            font-weight: 700;
-            text-transform: uppercase;
-        }
-
-        .title-group {
-            margin: 25px 0;
-        }
-
-        h1.kh {
-            font-size: 34px;
-            color: #111;
-            margin: 0 0 8px 0;
-            line-height: 1.4;
-            font-weight: 900;
-        }
-
-        h2 {
-            font-size: 22px;
-            color: #222;
-            margin: 6px 0;
-            line-height: 1.2;
-            font-weight: 900;
-        }
-
-        .subtitle {
-            font-size: 15px;
-            color: #e84118;
-            margin-top: 15px;
-            font-weight: 700;
-            background: #fdf0f0;
-            padding: 12px;
-            border-radius: 8px;
-            line-height: 1.8;
-        }
-
-        .qr-container {
-            background: white;
-            padding: 15px;
-            border: 4px dashed #ccc;
-            border-radius: 15px;
-            display: inline-block;
-            margin: 0 auto;
-        }
+        h1.kh { font-size: 32px; margin: 0 0 5px 0; color: #000; }
+        h2 { font-size: 20px; margin: 2px 0; color: #333; }
 
         .qr-code {
-            width: 220px;
-            height: 220px;
-            display: block;
+            width: 200px;
+            height: 200px;
+            margin: 15px 0;
         }
 
         .footer {
-            margin-top: 25px;
             font-size: 14px;
-            color: #333;
             font-weight: 700;
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 10px;
-            line-height: 1.8;
-            text-align: center; /* Centered the text */
+            color: #000;
+            line-height: 1.5;
+            text-align: center;
         }
 
-        .camera-icon {
-            font-size: 24px;
-            display: block; /* Centered the icon above the text */
-            margin-bottom: 8px;
-        }
-
-        @media print {
-            body {
-                background-color: white;
-                align-items: flex-start;
-                padding: 0;
-            }
-            .print-card {
-                box-shadow: none;
-                border: 6px solid #000;
-            }
-        }
+        .camera-icon { font-size: 20px; display: block; margin-bottom: 5px; }
     </style>
 </head>
 <body>
 
-    <div class="print-card">
-        <!-- Warning Header -->
-        <div class="header">
-            ⚠️ <span class="kh">សេចក្តីជូនដំណឹងអំពីការចត</span><br>
-            <span class="header-sub"><span class="en">PARKING NOTICE</span> • <span class="zh">停车通知</span></span>
-        </div>
+    <div class="sticker-card">
+        <h1 class="kh">ត្រូវការឱ្យខ្ញុំរំកិលឡានមែនទេ?</h1>
+        <h2 class="en">NEED ME TO MOVE?</h2>
+        <h2 class="zh">需要我挪车吗？</h2>
 
-        <!-- Main Question -->
-        <div class="title-group">
-            <h1 class="kh">ត្រូវការឱ្យខ្ញុំរំកិលឡានមែនទេ?</h1>
-            <h2 class="en">NEED ME TO MOVE?</h2>
-            <h2 class="zh">需要我挪车吗？</h2>
-            
-            <div class="subtitle">
-                <span class="kh">សូមកុំអូស ឬផាកពិន័យ។</span><br>
-                <span class="en">Please do not tow or ticket.</span><br>
-                <span class="zh">请勿拖车或罚款。</span>
-            </div>
-        </div>
+        <!-- Green QR Code (color=00b894 is the green hex) -->
+        <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=https://seangritthy.github.io/car-parking-tag/&margin=0&color=00b894" alt="QR Code">
 
-        <!-- The QR Code -->
-        <div class="qr-container">
-            <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=https://seangritthy.github.io/car-parking-tag/&margin=0" alt="QR Code">
-        </div>
-
-        <!-- Instructions -->
         <div class="footer">
             <span class="camera-icon">📷</span>
-            <span class="kh">ស្កេនដើម្បីផ្ញើការជូនដំណឹងមកខ្ញុំភ្លាមៗ។</span><br>
-            <span class="en">Scan to send me an instant alert.</span><br>
-            <span class="zh">扫码立即通知我挪车。</span>
+            <span class="kh">ស្កេនដើម្បីផ្ញើការជូនដំណឹង</span><br>
+            <span class="en">Scan to send instant alert</span><br>
+            <span class="zh">扫码立即通知我</span>
         </div>
     </div>
 
