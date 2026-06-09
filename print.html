@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Printable Car Tag - Battambang & Modern</title>
+    <!-- Importing Battambang (Khmer), Outfit (English), and Noto Sans SC (Chinese) -->
     <link href="https://fonts.googleapis.com/css2?family=Battambang:wght@400;700;900&family=Outfit:wght@400;700;900&family=Noto+Sans+SC:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
@@ -108,14 +109,13 @@
             padding: 15px;
             border-radius: 10px;
             line-height: 1.8;
-            text-align: left;
+            text-align: center; /* Centered the text */
         }
 
         .camera-icon {
             font-size: 24px;
-            vertical-align: middle;
-            margin-right: 8px;
-            float: left;
+            display: block; /* Centered the icon above the text */
+            margin-bottom: 8px;
         }
 
         @media print {
@@ -134,11 +134,13 @@
 <body>
 
     <div class="print-card">
+        <!-- Warning Header -->
         <div class="header">
             ⚠️ <span class="kh">សេចក្តីជូនដំណឹងអំពីការចត</span><br>
             <span class="header-sub"><span class="en">PARKING NOTICE</span> • <span class="zh">停车通知</span></span>
         </div>
 
+        <!-- Main Question -->
         <div class="title-group">
             <h1 class="kh">ត្រូវការឱ្យខ្ញុំរំកិលឡានមែនទេ?</h1>
             <h2 class="en">NEED ME TO MOVE?</h2>
@@ -151,15 +153,17 @@
             </div>
         </div>
 
+        <!-- The QR Code -->
         <div class="qr-container">
             <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=https://seangritthy.github.io/car-parking-tag/&margin=0" alt="QR Code">
         </div>
 
+        <!-- Instructions -->
         <div class="footer">
             <span class="camera-icon">📷</span>
-            <strong><span class="en"></span></strong> <span class="kh">ស្កេនដើម្បីផ្ញើការជូនដំណឹងមកខ្ញុំភ្លាមៗ។</span><br>
-            <strong><span class="en"></span></strong> <span class="en">Scan to send me an instant alert.</span><br>
-            <strong><span class="en"></span></strong> <span class="zh">扫码立即通知我挪车。</span>
+            <span class="kh">ស្កេនដើម្បីផ្ញើការជូនដំណឹងមកខ្ញុំភ្លាមៗ។</span><br>
+            <span class="en">Scan to send me an instant alert.</span><br>
+            <span class="zh">扫码立即通知我挪车。</span>
         </div>
     </div>
 
