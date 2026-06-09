@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Transparent Sticker with Border</title>
+    <title>Transparent Sticker - Final Design</title>
     <link href="https://fonts.googleapis.com/css2?family=Battambang:wght@400;700;900&family=Outfit:wght@400;700;900&family=Noto+Sans+SC:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
@@ -20,23 +20,41 @@
         .en { font-family: 'Outfit', sans-serif; }
         .zh { font-family: 'Noto Sans SC', sans-serif; }
 
-        /* Sticker with Transparent Background but Solid Border */
         .sticker-card {
             background-color: transparent;
             width: 450px;
-            padding: 30px;
+            padding: 0;
             text-align: center;
-            border: 8px solid #000; /* Re-added the thick border */
-            border-radius: 20px;
+            border: 8px solid #000;
+            border-radius: 25px;
+            overflow: hidden; /* Ensures the red header fits the border radius */
         }
 
-        .header-main { font-size: 22px; font-weight: 900; color: #000; margin-bottom: 5px; }
-        .header-sub { font-size: 14px; color: #333; margin-bottom: 20px; text-transform: uppercase; }
+        .header {
+            background-color: #ff4757; /* The classic red warning color */
+            color: white;
+            padding: 15px;
+            font-size: 20px;
+            font-weight: 900;
+            margin-bottom: 20px;
+        }
+
+        .header-sub { font-size: 14px; font-weight: 700; text-transform: uppercase; }
+
+        .body-content { padding: 0 20px 20px 20px; }
 
         h1.kh { font-size: 28px; color: #000; margin: 5px 0; }
         h2 { font-size: 18px; color: #333; margin: 2px 0; }
 
-        .subtitle { font-size: 14px; color: #555; margin: 15px 0; font-weight: 700; }
+        .subtitle { 
+            font-size: 14px; 
+            color: #e84118; 
+            margin: 15px 0; 
+            font-weight: 700; 
+            background: #fdf0f0; 
+            padding: 10px; 
+            border-radius: 8px; 
+        }
 
         .qr-code {
             width: 200px;
@@ -56,26 +74,30 @@
 <body>
 
     <div class="sticker-card">
-        <div class="header-main">⚠️ <span class="kh">សេចក្តីជូនដំណឹងអំពីការចត</span></div>
-        <div class="header-sub">PARKING NOTICE • 停车通知</div>
-
-        <h1 class="kh">ត្រូវការឱ្យខ្ញុំរំកិលឡានមែនទេ?</h1>
-        <h2 class="en">NEED ME TO MOVE?</h2>
-        <h2 class="zh">需要我挪车吗？</h2>
-        
-        <div class="subtitle">
-            <span class="kh">សូមកុំអូស ឬផាកពិន័យ។</span><br>
-            <span class="en">Please do not tow or ticket.</span><br>
-            <span class="zh">请勿拖车或罚款。</span>
+        <div class="header">
+            ⚠️ <span class="kh">សេចក្តីជូនដំណឹងអំពីការចត</span><br>
+            <span class="header-sub">PARKING NOTICE • 停车通知</span>
         </div>
 
-        <!-- Green QR Code -->
-        <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=https://seangritthy.github.io/car-parking-tag/&margin=0&color=00b894" alt="QR Code">
+        <div class="body-content">
+            <h1 class="kh">ត្រូវការឱ្យខ្ញុំរំកិលឡានមែនទេ?</h1>
+            <h2 class="en">NEED ME TO MOVE?</h2>
+            <h2 class="zh">需要我挪车吗？</h2>
+            
+            <div class="subtitle">
+                <span class="kh">សូមកុំអូស ឬផាកពិន័យ។</span><br>
+                <span class="en">Please do not tow or ticket.</span><br>
+                <span class="zh">请勿拖车或罚款。</span>
+            </div>
 
-        <div class="footer">
-            <span class="kh">ស្កេនដើម្បីផ្ញើការជូនដំណឹងមកខ្ញុំភ្លាមៗ។</span><br>
-            <span class="en">Scan to send me an instant alert.</span><br>
-            <span class="zh">扫码立即通知我挪车。</span>
+            <!-- Green QR Code -->
+            <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=https://seangritthy.github.io/car-parking-tag/&margin=0&color=00b894" alt="QR Code">
+
+            <div class="footer">
+                <span class="kh">ស្កេនដើម្បីផ្ញើការជូនដំណឹងមកខ្ញុំភ្លាមៗ។</span><br>
+                <span class="en">Scan to send me an instant alert.</span><br>
+                <span class="zh">扫码立即通知我挪车。</span>
+            </div>
         </div>
     </div>
 
