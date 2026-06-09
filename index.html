@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Car Parking Tag</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Khmer:wght@300;500;700&family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-color: #050505;
@@ -16,13 +16,13 @@
         }
 
         body {
-            font-family: 'Outfit', sans-serif;
+            /* Now supports Khmer characters beautifully */
+            font-family: 'Outfit', 'Noto Sans Khmer', sans-serif; 
             display: flex;
             align-items: center;
             justify-content: center;
             min-height: 100vh;
             background-color: var(--bg-color);
-            /* Creating a subtle glowing background orb effect */
             background-image: 
                 radial-gradient(circle at 15% 50%, rgba(79, 172, 254, 0.15), transparent 25%),
                 radial-gradient(circle at 85% 30%, rgba(0, 242, 254, 0.15), transparent 25%);
@@ -32,12 +32,11 @@
             color: var(--text-main);
         }
 
-        /* The frosted glass card */
         .glass-card {
             background: var(--card-bg);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            padding: 40px 30px;
+            padding: 30px;
             border-radius: 24px;
             border: 1px solid rgba(255, 255, 255, 0.05);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
@@ -48,7 +47,6 @@
             overflow: hidden;
         }
 
-        /* Top glowing accent line */
         .glass-card::before {
             content: '';
             position: absolute;
@@ -59,9 +57,35 @@
             background: linear-gradient(90deg, transparent, var(--neon-blue), var(--neon-purple), transparent);
         }
 
+        /* Language Switcher Styling */
+        .lang-switcher {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-sub);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 6px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+
+        .lang-btn.active {
+            color: var(--neon-blue);
+            border-color: var(--neon-blue);
+            background: rgba(0, 242, 254, 0.1);
+        }
+
         .icon {
-            font-size: 64px;
-            margin-bottom: 20px;
+            font-size: 54px;
+            margin-bottom: 15px;
             filter: drop-shadow(0 0 15px rgba(0, 242, 254, 0.4));
             animation: pulse 2s infinite alternate;
         }
@@ -72,22 +96,21 @@
         }
 
         h1 {
-            font-size: 28px;
+            font-size: 24px;
             font-weight: 700;
             margin: 0 0 12px 0;
-            letter-spacing: 0.5px;
+            line-height: 1.4;
         }
 
         p {
             color: var(--text-sub);
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 300;
             line-height: 1.6;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
         }
 
-        /* Neon gradient button */
-        button {
+        .notify-button {
             background: linear-gradient(90deg, var(--neon-purple) 0%, var(--neon-blue) 100%);
             color: #000;
             border: none;
@@ -99,21 +122,15 @@
             box-shadow: 0 8px 25px rgba(0, 242, 254, 0.3);
             transition: all 0.3s ease;
             width: 100%;
-            letter-spacing: 1px;
-            text-transform: uppercase;
+            font-family: inherit;
         }
 
-        button:hover {
+        .notify-button:hover {
             box-shadow: 0 12px 30px rgba(0, 242, 254, 0.5);
             transform: translateY(-2px);
         }
 
-        button:active {
-            transform: translateY(1px);
-            box-shadow: 0 4px 15px rgba(0, 242, 254, 0.2);
-        }
-
-        button:disabled {
+        .notify-button:disabled {
             background: #2a2a35;
             color: #555;
             box-shadow: none;
@@ -122,12 +139,11 @@
         }
 
         #status {
-            margin-top: 24px;
-            font-size: 14px;
+            margin-top: 20px;
+            font-size: 13px;
             font-weight: 500;
             color: var(--neon-blue);
             min-height: 20px;
-            letter-spacing: 0.5px;
         }
         
         .error {
@@ -139,16 +155,75 @@
 <body>
 
     <div class="glass-card">
-        <div class="icon">🚘</div>
-        <h1>Need me to move?</h1>
-        <p>Tap the button below and I will receive a secure alert to come move my vehicle immediately.</p>
+        <div class="lang-switcher">
+            <button class="lang-btn active" onclick="switchLang('en')" id="btn-en">English</button>
+            <button class="lang-btn" onclick="switchLang('km')" id="btn-km">ខ្មែរ</button>
+            <button class="lang-btn" onclick="switchLang('zh')" id="btn-zh">中文</button>
+        </div>
 
-        <button id="notifyBtn" onclick="sendNotification()">Notify Owner</button>
+        <div class="icon">🚘</div>
+        
+        <h1 id="titleText">Need me to move?</h1>
+        <p id="descText">Tap the button below and I will receive a secure alert to come move my vehicle immediately.</p>
+
+        <button id="notifyBtn" class="notify-button" onclick="sendNotification()">Notify Owner</button>
         
         <div id="status"></div>
     </div>
 
     <script>
+        // --- TRANSLATION DICTIONARY ---
+        const translations = {
+            en: {
+                title: "Need me to move?",
+                desc: "Tap the button below and I will receive a secure alert to come move my vehicle immediately.",
+                btnDefault: "Notify Owner",
+                btnSending: "SENDING ALERT...",
+                success: "ALERT SENT. OWNER EN ROUTE.",
+                error: "CONNECTION FAILED. TRY AGAIN."
+            },
+            km: {
+                title: "ត្រូវការឱ្យខ្ញុំរំកិលឡានមែនទេ?",
+                desc: "សូមចុចប៊ូតុងខាងក្រោម នោះខ្ញុំនឹងទទួលបានការជូនដំណឹងភ្លាមៗ ដើម្បីមករំកិលឡានរបស់ខ្ញុំ។",
+                btnDefault: "ជូនដំណឹងដល់ម្ចាស់ឡាន",
+                btnSending: "កំពុងផ្ញើការជូនដំណឹង...",
+                success: "បានផ្ញើការជូនដំណឹង។ ម្ចាស់កំពុងធ្វើដំណើរមក។",
+                error: "ការតភ្ជាប់បរាជ័យ។ សូមព្យាយាមម្តងទៀត។"
+            },
+            zh: {
+                title: "需要我挪车吗？",
+                desc: "点击下方按钮，我将立即收到安全提醒并前来挪车。",
+                btnDefault: "通知车主",
+                btnSending: "正在发送提醒...",
+                success: "提醒已发送。车主正在赶来。",
+                error: "连接失败。请重试。"
+            }
+        };
+
+        let currentLang = 'en';
+
+        // --- LANGUAGE SWITCHER LOGIC ---
+        function switchLang(lang) {
+            currentLang = lang;
+            
+            // Update text on the screen
+            document.getElementById('titleText').innerText = translations[lang].title;
+            document.getElementById('descText').innerText = translations[lang].desc;
+            
+            // Only update the button text if it hasn't been clicked yet
+            const btn = document.getElementById('notifyBtn');
+            if (!btn.disabled) {
+                btn.innerText = translations[lang].btnDefault;
+            }
+
+            // Update button styles
+            document.getElementById('btn-en').classList.remove('active');
+            document.getElementById('btn-km').classList.remove('active');
+            document.getElementById('btn-zh').classList.remove('active');
+            document.getElementById('btn-' + lang).classList.add('active');
+        }
+
+        // --- NOTIFICATION LOGIC ---
         function sendNotification() {
             // --- ENTER YOUR MAKE.COM WEBHOOK URL HERE ---
             const webhookUrl = 'https://hook.us2.make.com/2136rv0c9tt7b4x38i2lajk92pb4rfys'; 
@@ -158,24 +233,24 @@
             const statusText = document.getElementById('status');
 
             btn.disabled = true;
-            btn.innerText = "SENDING ALERT...";
+            btn.innerText = translations[currentLang].btnSending;
             statusText.innerText = "";
             statusText.classList.remove("error");
 
             fetch(webhookUrl, { method: 'POST' })
                 .then(response => {
                     if (response.ok || response.status === 200) {
-                        statusText.innerText = "ALERT SENT. OWNER EN ROUTE.";
+                        statusText.innerText = translations[currentLang].success;
                         btn.style.display = 'none';
                     } else {
                         throw new Error('Webhook failed');
                     }
                 })
                 .catch(error => {
-                    statusText.innerText = "CONNECTION FAILED. TRY AGAIN.";
+                    statusText.innerText = translations[currentLang].error;
                     statusText.classList.add("error");
                     btn.disabled = false;
-                    btn.innerText = "NOTIFY OWNER";
+                    btn.innerText = translations[currentLang].btnDefault;
                 });
         }
     </script>
