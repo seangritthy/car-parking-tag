@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Parking Tag</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f4f4f9;
+            margin: 0;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        p {
+            color: #666;
+            margin-bottom: 30px;
+        }
+        button {
+            background-color: #ff4757;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #ff6b81;
+        }
+        button:active {
+            transform: scale(0.98);
+        }
+        #status {
+            margin-top: 20px;
+            font-weight: bold;
+            color: #2ed573;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Need me to move my car?</h1>
+    <p>Tap the button below and I will get a notification on my phone immediately.</p>
+
+    <button id="notifyBtn" onclick="sendNotification()">Notify Owner to Move Car</button>
+    
+    <div id="status"></div>
+
+    <script>
+        function sendNotification() {
+            // --- ENTER YOUR TELEGRAM DETAILS HERE ---
+            const botToken = 'YOUR_BOT_TOKEN_HERE'; 
+            const chatId = 'YOUR_CHAT_ID_HERE'; 
+            // ----------------------------------------
+
+            const message = '🚨 CAR ALERT: Someone is requesting you to move your car!';
+            const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
+            
+            const btn = document.getElementById('notifyBtn');
+            const statusText = document.getElementById('status');
+
+            btn.disabled = true;
+            btn.innerText = "Sending...";
+
+            fetch(url)
+                .then(response => {
+                    if (response.ok) {
+                        statusText.innerText = "Notification sent! The owner is on their way.";
+                        btn.style.display = 'none';
+                    } else {
+                        statusText.innerText = "Error sending message. Please try again.";
+                        statusText.style.color = "red";
+                        btn.disabled = false;
+                        btn.innerText = "Notify Owner to Move Car";
+                    }
+                })
+                .catch(error => {
+                    statusText.innerText = "Network error. Make sure you have internet access.";
+                    statusText.style.color = "red";
+                    btn.disabled = false;
+                    btn.innerText = "Notify Owner to Move Car";
+                });
+        }
+    </script>
+</body>
+</html>
