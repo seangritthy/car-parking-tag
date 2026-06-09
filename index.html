@@ -4,163 +4,178 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Car Parking Tag</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #ff4757;
-            --primary-hover: #ff6b81;
-            --bg-gradient: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
-            --card-bg: #ffffff;
-            --text-main: #2d3436;
-            --text-sub: #636e72;
+            --bg-color: #050505;
+            --card-bg: rgba(20, 20, 25, 0.6);
+            --neon-blue: #00f2fe;
+            --neon-purple: #4facfe;
+            --text-main: #ffffff;
+            --text-sub: #a0a0ab;
         }
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Outfit', sans-serif;
             display: flex;
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            background: var(--bg-gradient);
+            background-color: var(--bg-color);
+            /* Creating a subtle glowing background orb effect */
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(79, 172, 254, 0.15), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(0, 242, 254, 0.15), transparent 25%);
             margin: 0;
             padding: 20px;
             box-sizing: border-box;
+            color: var(--text-main);
         }
 
-        /* The main white container */
-        .card {
+        /* The frosted glass card */
+        .glass-card {
             background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             padding: 40px 30px;
             border-radius: 24px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
             text-align: center;
             max-width: 380px;
             width: 100%;
+            position: relative;
+            overflow: hidden;
         }
 
-        /* Animated car icon */
+        /* Top glowing accent line */
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--neon-blue), var(--neon-purple), transparent);
+        }
+
         .icon {
-            font-size: 72px;
-            margin-bottom: 15px;
-            animation: float 3s ease-in-out infinite;
-            display: inline-block;
+            font-size: 64px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 15px rgba(0, 242, 254, 0.4));
+            animation: pulse 2s infinite alternate;
         }
 
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-8px); }
-            100% { transform: translateY(0px); }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.05); }
         }
 
         h1 {
-            color: var(--text-main);
-            font-size: 24px;
-            font-weight: 800;
-            margin: 0 0 10px 0;
+            font-size: 28px;
+            font-weight: 700;
+            margin: 0 0 12px 0;
+            letter-spacing: 0.5px;
         }
 
         p {
             color: var(--text-sub);
-            font-size: 15px;
+            font-size: 16px;
+            font-weight: 300;
             line-height: 1.6;
-            margin-bottom: 35px;
+            margin-bottom: 40px;
         }
 
-        /* Premium looking button */
+        /* Neon gradient button */
         button {
-            background: var(--primary);
-            color: white;
+            background: linear-gradient(90deg, var(--neon-purple) 0%, var(--neon-blue) 100%);
+            color: #000;
             border: none;
-            padding: 16px 32px;
+            padding: 18px 32px;
             font-size: 16px;
-            font-weight: 600;
+            font-weight: 700;
             border-radius: 50px;
             cursor: pointer;
-            box-shadow: 0 6px 15px rgba(255, 71, 87, 0.3);
+            box-shadow: 0 8px 25px rgba(0, 242, 254, 0.3);
             transition: all 0.3s ease;
             width: 100%;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
         button:hover {
-            background: var(--primary-hover);
+            box-shadow: 0 12px 30px rgba(0, 242, 254, 0.5);
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(255, 71, 87, 0.4);
         }
 
         button:active {
             transform: translateY(1px);
-            box-shadow: 0 2px 10px rgba(255, 71, 87, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 242, 254, 0.2);
         }
 
         button:disabled {
-            background: #b2bec3;
+            background: #2a2a35;
+            color: #555;
             box-shadow: none;
             cursor: not-allowed;
             transform: none;
         }
 
         #status {
-            margin-top: 20px;
+            margin-top: 24px;
             font-size: 14px;
-            font-weight: 600;
-            color: #00b894;
+            font-weight: 500;
+            color: var(--neon-blue);
             min-height: 20px;
+            letter-spacing: 0.5px;
         }
         
-        /* Added specific class for errors */
         .error {
-            color: #d63031 !important;
+            color: #ff4757 !important;
+            text-shadow: 0 0 10px rgba(255, 71, 87, 0.3);
         }
     </style>
 </head>
 <body>
 
-    <div class="card">
+    <div class="glass-card">
         <div class="icon">🚘</div>
         <h1>Need me to move?</h1>
-        <p>Tap the button below and I will receive an instant alert on my phone to come move my car.</p>
+        <p>Tap the button below and I will receive a secure alert to come move my vehicle immediately.</p>
 
-        <button id="notifyBtn" onclick="sendNotification()">🔔 Notify Owner</button>
+        <button id="notifyBtn" onclick="sendNotification()">Notify Owner</button>
         
         <div id="status"></div>
     </div>
 
     <script>
         function sendNotification() {
-            // --- ENTER YOUR WEBHOOK OR TELEGRAM DETAILS HERE ---
-            const botToken = 'YOUR_BOT_TOKEN_HERE'; 
-            const chatId = 'YOUR_CHAT_ID_HERE'; 
-            // ----------------------------------------
-
-            const message = '🚨 CAR ALERT: Someone is requesting you to move your car!';
-            const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
+            // --- ENTER YOUR MAKE.COM WEBHOOK URL HERE ---
+            const webhookUrl = 'https://hook.us2.make.com/2136rv0c9tt7b4x38i2lajk92pb4rfys'; 
+            // --------------------------------------------
             
             const btn = document.getElementById('notifyBtn');
             const statusText = document.getElementById('status');
 
             btn.disabled = true;
-            btn.innerText = "Sending Alert...";
+            btn.innerText = "SENDING ALERT...";
             statusText.innerText = "";
             statusText.classList.remove("error");
 
-            fetch(url)
+            fetch(webhookUrl, { method: 'POST' })
                 .then(response => {
-                    if (response.ok) {
-                        statusText.innerText = "Notification sent! I am on my way.";
+                    if (response.ok || response.status === 200) {
+                        statusText.innerText = "ALERT SENT. OWNER EN ROUTE.";
                         btn.style.display = 'none';
                     } else {
-                        statusText.innerText = "Error sending message. Please try again.";
-                        statusText.classList.add("error");
-                        btn.disabled = false;
-                        btn.innerText = "🔔 Notify Owner";
+                        throw new Error('Webhook failed');
                     }
                 })
                 .catch(error => {
-                    statusText.innerText = "Network error. Make sure you have internet access.";
+                    statusText.innerText = "CONNECTION FAILED. TRY AGAIN.";
                     statusText.classList.add("error");
                     btn.disabled = false;
-                    btn.innerText = "🔔 Notify Owner";
+                    btn.innerText = "NOTIFY OWNER";
                 });
         }
     </script>
