@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Transparent Sticker Tag</title>
+    <title>Transparent Sticker with Border</title>
     <link href="https://fonts.googleapis.com/css2?family=Battambang:wght@400;700;900&family=Outfit:wght@400;700;900&family=Noto+Sans+SC:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
@@ -11,7 +11,7 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background-color: #ffffff; /* White preview background */
+            background-color: #ffffff;
             margin: 0;
             padding: 20px;
         }
@@ -20,15 +20,18 @@
         .en { font-family: 'Outfit', sans-serif; }
         .zh { font-family: 'Noto Sans SC', sans-serif; }
 
-        /* Fully transparent design */
+        /* Sticker with Transparent Background but Solid Border */
         .sticker-card {
             background-color: transparent;
             width: 450px;
+            padding: 30px;
             text-align: center;
+            border: 8px solid #000; /* Re-added the thick border */
+            border-radius: 20px;
         }
 
-        .header-main { font-size: 24px; font-weight: 900; color: #000; margin-bottom: 10px; }
-        .header-sub { font-size: 14px; color: #333; margin-bottom: 20px; }
+        .header-main { font-size: 22px; font-weight: 900; color: #000; margin-bottom: 5px; }
+        .header-sub { font-size: 14px; color: #333; margin-bottom: 20px; text-transform: uppercase; }
 
         h1.kh { font-size: 28px; color: #000; margin: 5px 0; }
         h2 { font-size: 18px; color: #333; margin: 2px 0; }
@@ -46,13 +49,14 @@
             color: #000;
             font-weight: 700;
             line-height: 1.6;
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
 
     <div class="sticker-card">
-        <div class="header-main">⚠️ <span class="kh">សេចក្តីជូនដំណឹង</span></div>
+        <div class="header-main">⚠️ <span class="kh">សេចក្តីជូនដំណឹងអំពីការចត</span></div>
         <div class="header-sub">PARKING NOTICE • 停车通知</div>
 
         <h1 class="kh">ត្រូវការឱ្យខ្ញុំរំកិលឡានមែនទេ?</h1>
@@ -65,7 +69,7 @@
             <span class="zh">请勿拖车或罚款。</span>
         </div>
 
-        <!-- High-visibility Green QR Code (color=00b894) -->
+        <!-- Green QR Code -->
         <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=https://seangritthy.github.io/car-parking-tag/&margin=0&color=00b894" alt="QR Code">
 
         <div class="footer">
