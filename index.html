@@ -4,62 +4,131 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Car Parking Tag</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary: #ff4757;
+            --primary-hover: #ff6b81;
+            --bg-gradient: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+            --card-bg: #ffffff;
+            --text-main: #2d3436;
+            --text-sub: #636e72;
+        }
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Inter', sans-serif;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
-            background-color: #f4f4f9;
+            min-height: 100vh;
+            background: var(--bg-gradient);
             margin: 0;
-            text-align: center;
             padding: 20px;
+            box-sizing: border-box;
         }
+
+        /* The main white container */
+        .card {
+            background: var(--card-bg);
+            padding: 40px 30px;
+            border-radius: 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            max-width: 380px;
+            width: 100%;
+        }
+
+        /* Animated car icon */
+        .icon {
+            font-size: 72px;
+            margin-bottom: 15px;
+            animation: float 3s ease-in-out infinite;
+            display: inline-block;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0px); }
+        }
+
         h1 {
-            color: #333;
+            color: var(--text-main);
+            font-size: 24px;
+            font-weight: 800;
+            margin: 0 0 10px 0;
         }
+
         p {
-            color: #666;
-            margin-bottom: 30px;
+            color: var(--text-sub);
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 35px;
         }
+
+        /* Premium looking button */
         button {
-            background-color: #ff4757;
+            background: var(--primary);
             color: white;
             border: none;
-            padding: 15px 30px;
-            font-size: 18px;
-            border-radius: 8px;
+            padding: 16px 32px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 50px;
             cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: background-color 0.3s;
+            box-shadow: 0 6px 15px rgba(255, 71, 87, 0.3);
+            transition: all 0.3s ease;
+            width: 100%;
+            letter-spacing: 0.5px;
         }
+
         button:hover {
-            background-color: #ff6b81;
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 71, 87, 0.4);
         }
+
         button:active {
-            transform: scale(0.98);
+            transform: translateY(1px);
+            box-shadow: 0 2px 10px rgba(255, 71, 87, 0.3);
         }
+
+        button:disabled {
+            background: #b2bec3;
+            box-shadow: none;
+            cursor: not-allowed;
+            transform: none;
+        }
+
         #status {
             margin-top: 20px;
-            font-weight: bold;
-            color: #2ed573;
+            font-size: 14px;
+            font-weight: 600;
+            color: #00b894;
+            min-height: 20px;
+        }
+        
+        /* Added specific class for errors */
+        .error {
+            color: #d63031 !important;
         }
     </style>
 </head>
 <body>
 
-    <h1>Need me to move my car?</h1>
-    <p>Tap the button below and I will get a notification on my phone immediately.</p>
+    <div class="card">
+        <div class="icon">🚘</div>
+        <h1>Need me to move?</h1>
+        <p>Tap the button below and I will receive an instant alert on my phone to come move my car.</p>
 
-    <button id="notifyBtn" onclick="sendNotification()">Notify Owner to Move Car</button>
-    
-    <div id="status"></div>
+        <button id="notifyBtn" onclick="sendNotification()">🔔 Notify Owner</button>
+        
+        <div id="status"></div>
+    </div>
 
     <script>
         function sendNotification() {
-            // --- ENTER YOUR TELEGRAM DETAILS HERE ---
+            // --- ENTER YOUR WEBHOOK OR TELEGRAM DETAILS HERE ---
             const botToken = 'YOUR_BOT_TOKEN_HERE'; 
             const chatId = 'YOUR_CHAT_ID_HERE'; 
             // ----------------------------------------
@@ -71,25 +140,27 @@
             const statusText = document.getElementById('status');
 
             btn.disabled = true;
-            btn.innerText = "Sending...";
+            btn.innerText = "Sending Alert...";
+            statusText.innerText = "";
+            statusText.classList.remove("error");
 
             fetch(url)
                 .then(response => {
                     if (response.ok) {
-                        statusText.innerText = "Notification sent! The owner is on their way.";
+                        statusText.innerText = "Notification sent! I am on my way.";
                         btn.style.display = 'none';
                     } else {
                         statusText.innerText = "Error sending message. Please try again.";
-                        statusText.style.color = "red";
+                        statusText.classList.add("error");
                         btn.disabled = false;
-                        btn.innerText = "Notify Owner to Move Car";
+                        btn.innerText = "🔔 Notify Owner";
                     }
                 })
                 .catch(error => {
                     statusText.innerText = "Network error. Make sure you have internet access.";
-                    statusText.style.color = "red";
+                    statusText.classList.add("error");
                     btn.disabled = false;
-                    btn.innerText = "Notify Owner to Move Car";
+                    btn.innerText = "🔔 Notify Owner";
                 });
         }
     </script>
