@@ -11,7 +11,7 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background-color: #ffffff;
+            background-color: transparent;
             margin: 0;
             padding: 20px;
         }
@@ -37,6 +37,8 @@
             font-size: 20px;
             font-weight: 900;
             margin-bottom: 20px;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
         }
 
         .header-sub { font-size: 14px; font-weight: 700; text-transform: uppercase; }
@@ -51,15 +53,17 @@
             color: #e84118; 
             margin: 15px 0; 
             font-weight: 700; 
-            background: #fdf0f0; 
+            background: transparent; 
             padding: 10px; 
             border-radius: 8px; 
+            border: 1.5px dashed rgba(232, 65, 24, 0.4);
         }
 
         .qr-code {
             width: 200px;
             height: 200px;
             margin: 10px 0;
+            background: transparent;
         }
 
         .footer {
@@ -68,6 +72,27 @@
             font-weight: 700;
             line-height: 1.6;
             margin-top: 10px;
+        }
+
+        @media print {
+            html, body {
+                background: transparent !important;
+                background-color: transparent !important;
+                margin: 0;
+                padding: 0;
+            }
+
+            .sticker-card {
+                background: transparent !important;
+                background-color: transparent !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .subtitle {
+                background: transparent !important;
+                background-color: transparent !important;
+            }
         }
     </style>
 </head>
@@ -90,8 +115,8 @@
                 <span class="zh">请勿拖车或罚款。</span>
             </div>
 
-            <!-- Green QR Code -->
-            <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=https://seangritthy.github.io/car-parking-tag/&margin=0&color=00b894" alt="QR Code">
+            <!-- Green QR Code with Transparent Background -->
+            <img class="qr-code" src="https://quickchart.io/qr?text=https://seangritthy.github.io/car-parking-tag/&dark=00b894&light=00000000&size=400&margin=0" alt="QR Code">
 
             <div class="footer">
                 <span class="kh">ស្កេនដើម្បីផ្ញើការជូនដំណឹងមកខ្ញុំភ្លាមៗ។</span><br>
